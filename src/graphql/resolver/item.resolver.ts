@@ -1,5 +1,4 @@
 import { prisma } from "../../config/dbConnection"
-import { ItemSchema, PartialItemSchema } from '../../validation/item.validation';
 import { HomeController } from '../../controllers'
 
 const homeCtrl = new HomeController();

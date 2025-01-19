@@ -1,6 +1,15 @@
+import { z } from "zod";
 import { prisma } from "../config/dbConnection";
-import { ItemSchema, PartialItemSchema } from "../validation/item.validation";
+import { errorResponse, successResponse } from "../helpers";
+import { userRegisterInput } from "../types";
+import { ItemSchema, PartialItemSchema } from "../validation";
+import { RegisterSchema } from "../validation/user.validation";
 
+interface controlleResponse {
+    success: boolean;
+    message: string;
+    data?: any
+}
 export class HomeController{
 
     async createItem(name: string, price: number) {
@@ -14,5 +23,18 @@ export class HomeController{
   
         PartialItemSchema.parse({ data });
         return await prisma.item.update({ where: { id }, data });
+    }
+
+    async userRegister(data: userRegisterInput): Promise<controlleResponse>{
+        try {
+            RegisterSchema.parse(data);
+            return successResponse('Registration successfull', data);
+        } catch (error) {
+            if (error instanceof z.ZodError) {
+                return errorResponse(error.errors.map(e => e.message).join(', '));
+            } else {
+                return errorResponse('Something went wrong');
+            }
+        }
     }
 }

@@ -1,17 +1,14 @@
 import { gql} from "graphql-tag"
-export const itemSchema = gql`
-    type Item {
+export const authSchema = gql`
+    type User {
         id: Int!
         name: String!
-        price: Float!
+        email: String!
+        createdAt: String!
+        updatedAt: String!
     }
 
-    type Query {
-        getItems: [Item!]
-        getItem(id: Int!): Item
-    }
-
-    ApiResponse {
+    type ApiResponse {
         success: Boolean!
         message: String!
         data: User
@@ -21,7 +18,6 @@ export const itemSchema = gql`
         email: String!
     }
     type Mutation {
-        userRegister(input: registerInput!): Item
-        updateItem(id: Int!, name: String, price: Float): Item
+        userRegister(input: registerInput!): ApiResponse
     }
 `;
