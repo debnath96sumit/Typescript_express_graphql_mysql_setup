@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ESNext", // Use the latest ECMAScript features
     "module": "CommonJS", // Specify module code generation
-    // "rootDir": "src", // Root directory of source files
+    "rootDir": "src", // Root directory of source files
     "outDir": "dist", // Output directory for compiled files
     // "strict": true, // Enable all strict type-checking options
     // "esModuleInterop": true, // Allow default imports from modules without default exports
